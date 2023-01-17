@@ -1,6 +1,7 @@
 <?php
 $status = 0; 
 $msg = "";
+$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 if(isset($_FILES['image']['name'])) {     
     $filename = $_FILES['image']['name'];
@@ -33,7 +34,8 @@ if(isset($_FILES['image']['name'])) {
 $response = array(
     'status' => $status,
     'msg' => $msg,
-    'username' => $_POST['username']
+    'username' => $_POST['username'],
+	'apiUrl' => $link,
 );
 
 echo json_encode($response);
